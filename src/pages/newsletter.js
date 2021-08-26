@@ -9,7 +9,17 @@ const NewsLetter = () => {
           <h2>Get all the latest stories to your inbox!</h2>
           <h4>I write to my digital friends every few weeks.</h4>
 
-          <form className="contact-form">
+          <form
+            className="contact-form"
+            name="mdx-contact-form"
+            method="POST"
+            netlify-honeypot="bot-field"
+            data-netlify="true"
+            action="/success"
+          >
+            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="form-name" value="mdx-contact-form" />
+
             <input
               type="text"
               name="Name"
