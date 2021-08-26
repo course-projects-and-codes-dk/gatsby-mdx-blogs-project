@@ -5,7 +5,11 @@ import Posts from '../components/Posts'
 import { graphql } from 'gatsby'
 
 const IndexPage = () => {
-  return <Layout></Layout>
+  return (
+    <Layout>
+      <Hero showPerson />
+    </Layout>
+  )
 }
 
 export default IndexPage
