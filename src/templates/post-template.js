@@ -12,7 +12,7 @@ const PostTemplate = ({ data }) => {
   const {
     mdx: {
       body,
-      frontmatter: { title, category, date, image },
+      frontmatter: { title, category, date, image, embeddedImages },
     },
   } = data
 
@@ -34,7 +34,7 @@ const PostTemplate = ({ data }) => {
             <p>{date}</p>
             <div className="underline"></div>
           </div>
-          <MDXRenderer>{body}</MDXRenderer>
+          <MDXRenderer embeddedImages={embeddedImages}>{body}</MDXRenderer>
         </article>
 
         {/* banner */}
@@ -55,6 +55,11 @@ export const query = graphql`
         readTime
         slug
         title
+        embeddedImages {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
         image {
           childImageSharp {
             gatsbyImageData(layout: CONSTRAINED)
