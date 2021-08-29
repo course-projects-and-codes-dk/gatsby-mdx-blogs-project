@@ -8,10 +8,42 @@ import { graphql } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 const PostTemplate = ({ data }) => {
-  console.log(data)
+  // get data from query
+  const {
+    mdx: {
+      body,
+      frontmatter: { title, category, date, image },
+    },
+  } = data
 
   // jsx
-  return <h2>post template</h2>
+  return (
+    <Layout>
+      <Hero />
+      <Wrapper>
+        {/* data */}
+        <article>
+          <GatsbyImage
+            image={getImage(image)}
+            alt={title}
+            className="main-img"
+          />
+          <div className="post-info">
+            <span>{category}</span>
+            <h2>{title}</h2>
+            <p>{date}</p>
+            <div className="underline"></div>
+          </div>
+          <MDXRenderer>{body}</MDXRenderer>
+        </article>
+
+        {/* banner */}
+        <article>
+          <Banner />
+        </article>
+      </Wrapper>
+    </Layout>
+  )
 }
 
 export const query = graphql`
@@ -19,7 +51,7 @@ export const query = graphql`
     mdx(frontmatter: { slug: { eq: $slug } }) {
       frontmatter {
         category
-        date(formatString: "MMMM do, yyyy")
+        date(formatString: "MMMM Do, yyyy")
         readTime
         slug
         title
